@@ -1,0 +1,8 @@
+# deploy for sandbox
+git checkout master
+git pull
+git checkout sandbox
+git pull
+git merge master
+cap deploy
+git checkout master
