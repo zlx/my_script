@@ -1,11 +1,11 @@
 my_script
 =========
 
-*** before ***
+* before
 
  install zsh
 
-*** install ***
+* install
 
 1. git clone git://github.com/zlx/my_script.git
 
@@ -17,8 +17,10 @@ my_script
 
 5. cp script/.bash_alias ~/.bash_alias
 
+```
 scripts
   ---> bin
 
 alias
   ---> script/bash_alias
+```
