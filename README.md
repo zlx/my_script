@@ -4,6 +4,7 @@ my_script
 * before
 
  install zsh
+ install vundle
 
 * install
 
@@ -16,6 +17,10 @@ my_script
 4. cp script/.zshrc ~/.zshrc
 
 5. cp script/.bash_alias ~/.bash_alias
+
+6. cp script/.vimrc ~/.vimrc
+
+7. vim && :BundleInstall
 
 ```
 scripts
