@@ -3,8 +3,10 @@ my_script
 
 * before
 
- install zsh
- install vundle
+```ruby
+sudo yum install zsh
+sudo yum install vundle
+```
 
 * install
 
@@ -12,7 +14,7 @@ my_script
 
 2. cd my_script
 
-3. cp oh-my-zsh ~/.oh-my-zsh
+3. cp oh-my-zsh ~/.oh-my-zsh -r
 
 4. cp script/.zshrc ~/.zshrc
 
