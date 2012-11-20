@@ -1,2 +1,10 @@
 # add route to eth0  need pass a route ip
 sudo /sbin/route add -net 0.0.0.0 gw $1 eth0
+
+echo ""
+echo "current goal:"
+
+current_goal
+
+echo ""
+echo "run goal for details"

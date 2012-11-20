@@ -1,0 +1,15 @@
+#! /usr/bin/env ruby
+
+File.open("/home/soffolk/goal/current") do |f|
+  flag = false
+  f.readlines.each do |line|
+    if (line =~ /^Final Time:/ || flag)
+      flag = true
+      if line =~ /^######/
+        flag = false
+      elsif line != "\n"
+        print line
+      end
+    end
+  end
+end

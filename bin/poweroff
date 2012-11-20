@@ -1,0 +1,94 @@
+#! /bin/zsh
+# ---------------------------------------------------------------------------
+# poweroff - shut down the my compute
+
+# Copyright 2012,  <soffolk@localhost.localdomain>
+# All rights reserved.
+
+# Usage: poweroff [-h|--help]
+
+# Revision history:
+# 2012-11-12	Created by new_script ver. 3.0
+# ---------------------------------------------------------------------------
+
+PROGNAME=${0##*/}
+VERSION="0.1"
+
+clean_up() { # Perform pre-exit housekeeping
+	return
+}
+
+error_exit() {
+	echo -e "${PROGNAME}: ${1:-"Unknown Error"}" >&2
+	clean_up
+	exit 1
+}
+
+echo_goal() {
+    echo "################################"
+    echo "#                              #"
+    echo "#  what's your goal tomorrow?  #"
+    echo "#                              #"
+    echo "################################"
+
+    echo -n "to edit ~/goal/current ?(y/n): "
+}
+
+graceful_exit() {
+	clean_up
+	exit
+}
+
+signal_exit() { # Handle trapped signals
+	case $1 in
+		INT)    error_exit "Program interrupted by user" ;;
+		TERM)   echo -e "\n$PROGNAME: Program terminated" >&2 ; graceful_exit ;;
+		*)      error_exit "$PROGNAME: Terminating on unknown signal" ;;
+	esac
+}
+
+usage() {
+	echo -e "Usage: $PROGNAME [-h|--help]"
+}
+
+help_message() {
+	cat <<- _EOF_
+	$PROGNAME ver. $VERSION
+	shut down the my compute
+
+	$(usage)
+
+	Options:
+	-h, --help	Display this help message and exit.
+
+	_EOF_
+	return
+}
+
+# Trap signals
+trap "signal_exit TERM" TERM HUP
+trap "signal_exit INT"  INT
+
+
+
+# Parse command-line
+while [[ -n $1 ]]; do
+	case $1 in
+		-h | --help)	help_message; graceful_exit ;;
+		-* | --*)	usage; error_exit "Unknown option $1" ;;
+		*)		echo "Argument $1 to process..." ;;
+	esac
+	shift
+done
+
+# Main logic
+echo_goal
+
+read -q SELECT
+
+if [[ $SELECT == "y" ]]; then
+   echo "  goal; vi"
+else
+  /usr/bin/poweroff -f
+fi
+
